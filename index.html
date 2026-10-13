@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Teaching Workspace</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Password screen -->
+<section id="lock">
+  <form id="lockForm">
+    <h1>Teaching Workspace</h1>
+    <p>Private. Enter your password to continue.</p>
+    <input id="pw" type="password" placeholder="Password" autocomplete="off" autofocus>
+    <button class="btn primary">Unlock</button>
+    <p id="lockErr" class="err" hidden>Wrong password. Try again.</p>
+  </form>
+</section>
+
+<!-- Main app -->
+<div id="shell" hidden>
+  <header>
+    <button class="logo" data-home>Teaching Workspace</button>
+    <nav>
+      <button class="btn" id="theme">Dark mode</button>
+      <button class="btn" id="export">Export backup</button>
+      <label class="btn">Import backup<input id="import" type="file" accept=".json" hidden></label>
+    </nav>
+  </header>
+  <main id="app"></main>
+</div>
+
+<!-- Add form (one dialog reused for everything) -->
+<dialog id="dlg">
+  <form id="form">
+    <h2 id="fTitle"></h2>
+    <div id="fBody"></div>
+    <div class="row">
+      <button class="btn primary">Save</button>
+      <button class="btn" type="button" id="cancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
