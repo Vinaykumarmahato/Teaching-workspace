@@ -26,6 +26,12 @@ const SUBJECTS = [
     rubrics: [
       { title: "Data Structures Python Activities",
         file: "Activity Rubrics/Data_Structures_Python_Activities.pdf" }
+    ],
+    resources: [
+      { title: "Lab Record",
+        file: "lab record/Data Structures with Python.pdf" },
+      { title: "Viva Questions",
+        file: "Viva Question/Data_Structures_Python_Viva_Questions.pdf" }
     ]
   },
   {
@@ -49,6 +55,12 @@ const SUBJECTS = [
     rubrics: [
       { title: "Programming Concepts in Mechanical Engineering Activities",
         file: "Activity Rubrics/Programming_Concepts_in_Mechanical_Engineering_Activities.pdf" }
+    ],
+    resources: [
+      { title: "Lab Record",
+        file: "lab record/Programming Concepts in Mechanical Engineering.pdf" },
+      { title: "Viva Questions",
+        file: "Viva Question/Programming_Concepts_Viva_Questions.pdf" }
     ]
   },
   {
@@ -72,6 +84,12 @@ const SUBJECTS = [
     rubrics: [
       { title: "System & Network Admin Activities",
         file: "Activity Rubrics/System_Network_Admin_Activities.pdf" }
+    ],
+    resources: [
+      { title: "Lab Record",
+        file: "lab record/System & Network Administration.pdf" },
+      { title: "Viva Questions",
+        file: "Viva Question/System_Network_Admin_Viva_Questions.pdf" }
     ]
   }
 ];

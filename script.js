@@ -63,11 +63,18 @@ function renderSubjects() {
   const list = $("subject-list");
   list.innerHTML = "";
   SUBJECTS.forEach((s) => {
+    const resourceCount = (title) => (s.resources || []).filter((resource) => resource.title === title).length;
+    const counts = [
+      `${s.tests.length} ${s.tests.length === 1 ? "test" : "tests"}`,
+      `${(s.rubrics || []).length} ${(s.rubrics || []).length === 1 ? "activity rubric" : "activity rubrics"}`,
+      `${resourceCount("Lab Record")} ${resourceCount("Lab Record") === 1 ? "lab record" : "lab records"}`,
+      `${resourceCount("Viva Questions")} ${resourceCount("Viva Questions") === 1 ? "viva question set" : "viva question sets"}`
+    ];
     const btn = document.createElement("button");
     btn.className = "subject-card";
     btn.innerHTML = `<span class="name"></span><span class="meta"></span>`;
     btn.querySelector(".name").textContent = s.name;
-    btn.querySelector(".meta").textContent = `${s.code} · ${s.tests.length} tests`;
+    btn.querySelector(".meta").textContent = `${s.code} · ${counts.join(" · ")}`;
     btn.addEventListener("click", () => { location.hash = s.id; });
     list.appendChild(btn);
   });
@@ -149,6 +156,15 @@ function showSubject(id) {
   });
   $("rubric-wrap").hidden = !(s.rubrics && s.rubrics.length);
 
+  const resources = $("resource-list");
+  resources.innerHTML = "";
+  (s.resources || []).forEach((resource) => {
+    resources.appendChild(
+      paperCard(resource.title, resourceButtons(resource.title.toLowerCase(), resource.file))
+    );
+  });
+  $("resource-wrap").hidden = !(s.resources && s.resources.length);
+
   $("subjects-screen").hidden = true;
   $("papers-screen").hidden = false;
   window.scrollTo(0, 0);
@@ -168,3 +184,60 @@ window.addEventListener("hashchange", route);
 renderSubjects();
 renderSyllabuses();
 if (sessionStorage.getItem("unlocked") === "1") unlock();
+
+(() => {
+  const button = document.querySelector(".bio-res-why-toggle");
+  const panel = $("bio-res-why-answer");
+  if (!button || !panel) return;
+
+  const icon = button.querySelector(".bio-res-why-icon");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let closeTimer;
+  let closeHandler;
+
+  button.addEventListener("click", () => {
+    const isOpening = button.getAttribute("aria-expanded") !== "true";
+
+    window.clearTimeout(closeTimer);
+    if (closeHandler) {
+      panel.removeEventListener("transitionend", closeHandler);
+      closeHandler = null;
+    }
+
+    button.setAttribute("aria-expanded", String(isOpening));
+    panel.setAttribute("aria-hidden", String(!isOpening));
+    if (icon) icon.textContent = isOpening ? "−" : "+";
+
+    if (isOpening) {
+      panel.hidden = false;
+      if (reducedMotion.matches) {
+        panel.classList.add("bio-res-why-is-open");
+      } else {
+        requestAnimationFrame(() => {
+          if (button.getAttribute("aria-expanded") === "true") {
+            panel.classList.add("bio-res-why-is-open");
+          }
+        });
+      }
+      return;
+    }
+
+    panel.classList.remove("bio-res-why-is-open");
+    if (reducedMotion.matches) {
+      panel.hidden = true;
+      return;
+    }
+
+    const finishClosing = (event) => {
+      if (event && (event.target !== panel || event.propertyName !== "grid-template-rows")) return;
+      if (button.getAttribute("aria-expanded") === "false") panel.hidden = true;
+      panel.removeEventListener("transitionend", finishClosing);
+      closeHandler = null;
+      window.clearTimeout(closeTimer);
+    };
+
+    closeHandler = finishClosing;
+    panel.addEventListener("transitionend", finishClosing);
+    closeTimer = window.setTimeout(() => finishClosing(), 300);
+  });
+})();
