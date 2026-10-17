@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Teaching Workspace</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teaching Resources</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- Password screen -->
-<section id="lock">
-  <form id="lockForm">
-    <h1>Teaching Workspace</h1>
-    <p>Private. Enter your password to continue.</p>
-    <input id="pw" type="password" placeholder="Password" autocomplete="off" autofocus>
-    <button class="btn primary">Unlock</button>
-    <p id="lockErr" class="err" hidden>Wrong password. Try again.</p>
-  </form>
-</section>
+  <!-- PASSWORD SCREEN -->
+  <section id="lock-screen" class="lock">
+    <form id="lock-form" class="lock-box" autocomplete="off">
+      <h1>Teaching Resources</h1>
+      <p>Enter the password to continue.</p>
+      <input id="password" type="password" placeholder="Password" required autofocus />
+      <button type="submit" class="btn primary">Unlock</button>
+      <p id="lock-error" class="error" role="alert" hidden>Wrong password. Try again.</p>
+    </form>
+  </section>
 
-<!-- Main app -->
-<div id="shell" hidden>
-  <header>
-    <button class="logo" data-home>Teaching Workspace</button>
-    <nav>
-      <button class="btn" id="theme">Dark mode</button>
-      <button class="btn" id="export">Export backup</button>
-      <label class="btn">Import backup<input id="import" type="file" accept=".json" hidden></label>
-    </nav>
-  </header>
-  <main id="app"></main>
-</div>
+  <!-- MAIN SITE (hidden until unlocked) -->
+  <main id="app" hidden>
+    <header class="topbar">
+      <h1>Teaching Resources</h1>
+      <button id="logout" class="btn ghost">Lock</button>
+    </header>
 
-<!-- Add form (one dialog reused for everything) -->
-<dialog id="dlg">
-  <form id="form">
-    <h2 id="fTitle"></h2>
-    <div id="fBody"></div>
-    <div class="row">
-      <button class="btn primary">Save</button>
-      <button class="btn" type="button" id="cancel">Cancel</button>
-    </div>
-  </form>
-</dialog>
+    <!-- Screen 1: subjects -->
+    <section id="subjects-screen">
+      <p class="lead">Choose a subject</p>
+      <div id="subject-list" class="grid subjects"></div>
+      <section id="syllabus-section">
+        <h2>Syllabuses</h2>
+        <div id="syllabus-list" class="grid papers"></div>
+      </section>
+    </section>
 
-<script src="data.js"></script>
-<script src="script.js"></script>
+    <!-- Screen 2: question / answer cards -->
+    <section id="papers-screen" hidden>
+      <button id="back" class="btn ghost">&larr; All subjects</button>
+      <h2 id="subject-title"></h2>
+      <p id="subject-code" class="lead"></p>
+      <div id="paper-list" class="grid papers"></div>
+      <div id="rubric-wrap" hidden>
+        <h3>Activity rubrics</h3>
+        <div id="rubric-list" class="grid papers"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
