@@ -31,6 +31,9 @@
   --color-glow-two: rgb(71 116 187 / 8%);
   --color-shadow: rgb(24 39 67 / 8%);
   --color-shadow-strong: rgb(24 39 67 / 14%);
+  --color-bio-highlight-start: #d9f2ed;
+  --color-bio-highlight-end: #e6eaff;
+  --color-bio-highlight-ink: #145b62;
 
   --font-body: "DM Sans", sans-serif;
   --font-heading: "Manrope", sans-serif;
@@ -351,6 +354,21 @@ p {
   color: var(--color-muted);
   font-size: clamp(0.96rem, 1.6vw, 1.05rem);
   line-height: 1.75;
+}
+
+.bio-res-highlight {
+  padding: 0.04em 0.3em 0.08em;
+  border-radius: 0.35em;
+  color: var(--color-bio-highlight-ink);
+  background: linear-gradient(
+    110deg,
+    var(--color-bio-highlight-start),
+    var(--color-bio-highlight-end)
+  );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .bio-res-why-toggle {
@@ -728,6 +746,9 @@ p {
     --color-glow-two: rgb(69 106 172 / 12%);
     --color-shadow: rgb(0 0 0 / 20%);
     --color-shadow-strong: rgb(0 0 0 / 34%);
+    --color-bio-highlight-start: #20463f;
+    --color-bio-highlight-end: #29385b;
+    --color-bio-highlight-ink: #b9eee2;
   }
 
   .topbar {
