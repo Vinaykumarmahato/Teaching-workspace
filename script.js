@@ -144,7 +144,8 @@ function showSubject(id) {
     papers.appendChild(
       paperCard(t.title, [
         ...resourceButtons("question", t.question),
-        ...resourceButtons("answer", t.answer)
+        ...resourceButtons("answer", t.answer),
+        ...(t.programOnly ? resourceButtons("program only", t.programOnly) : [])
       ])
     );
   });

@@ -21,7 +21,8 @@ const SUBJECTS = [
         answer:   "answers/DSP_CIE_Theory_Test_III_Answers_25CS33I.pdf" },
       { title: "CIE Practice Test IV",
         question: "papers/CIE_Practice_Test_IV_Data_Structures_Python_25CS33I.pdf",
-        answer:   "answers/DSP_CIE_Practice_Test_IV_Answers_25CS33I.pdf" }
+        answer:   "answers/CIE_Practice_Test_IV_Data_Structures_Python_Answerbook25CS33I.pdf",
+        programOnly: "answers/CIE_Practice_Test_IV_Data_Structures_Python_Answerbook_Only_Coding_25CS33I.py" }
     ],
     rubrics: [
       { title: "Data Structures Python Activities",
